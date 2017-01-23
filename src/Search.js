@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import querystring from 'query-string'
 import './App.css';
 
 class Search extends Component {
@@ -17,8 +18,22 @@ class Search extends Component {
     }
 
     handleSubmit(event) {
+      var points = document.getElementById("pointchoose").selectedIndex;
+      var period = document.getElementById("periodchoose").selectedIndex;
+      var search = document.getElementById("searchinput").value;
+
+      var query = querystring.stringify({
+        search: search,
+        period: (period > 0) ? period.toString() : '',
+        points: (points > 0) ? points.toString() : ''
+      });
+
       event.preventDefault();
-      axios.get('http://thisismydomain.name/scivoo/search')
+      axios.post('http://thisismydomain.name/scivoo/api/search', query,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }})
       .then(response => this.setState(
         {courses: response.data.courses}
       ));
@@ -32,6 +47,7 @@ class Search extends Component {
           <div className="pure-g">
           <SearchInput/>
           <SelectPeriod/>
+          <SelectPoints/>
           <div className="pure-u-1">
             <input type="submit" value="Submit" className="pure-button pure-button-primary"/>
           </div>
@@ -81,11 +97,11 @@ function SearchInput() {
 
 function SelectPeriod() {
   return(
-    <div className="pure-u-1">
-      <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
+    <div className="pure-u-1-2">
+      <div className="pure-u-md-6-24 pure-u-lg-10-24"/>
       <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
         <select id="periodchoose" className="pure-input">
-          <option>Period - All</option>
+          <option>Period - Any</option>
           <option>I</option>
           <option>II</option>
           <option>III</option>
@@ -93,9 +109,31 @@ function SelectPeriod() {
           <option>V</option>
         </select>
       </div>
-      <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
     </div>
   );
 };
+
+function SelectPoints() {
+  return(
+    <div className="pure-u-1-2">
+      <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
+        <select id="pointchoose" className="pure-input">
+          <option>Points - Any</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+        </select>
+      </div>
+      <div className="pure-u-md-6-24 pure-u-lg-10-24"/>
+    </div>
+  );
+}
 
 export default Search;

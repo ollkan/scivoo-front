@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Search from './Search'
 import Header from './Header'
 import './App.css';
 
@@ -8,7 +7,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header/>
-        <Search/>
+        {this.props.children}
       </div>
     );
   }

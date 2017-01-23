@@ -51,7 +51,19 @@ ul {
   float: right;
 }
 
-#searchinput, #periodchoose {
+#searchinput {
   width: 98%;
   margin: 1%;
+}
+
+#periodchoose {
+  width: 97%;
+  margin-left: 2%;
+  margin-right: 1%;
+}
+
+#pointchoose {
+  width: 97%;
+  margin-right: 2%;
+  margin-left: 1%;
 }
