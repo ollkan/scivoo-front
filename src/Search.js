@@ -4,12 +4,19 @@ import querystring from 'query-string'
 import { Link } from 'react-router'
 import './App.css';
 
+const storage = window.sessionStorage
 class Search extends Component {
 
   constructor(props) {
       super(props);
 
-      this.state = {courses: []};
+      var storageState = JSON.parse(storage.getItem("state"));
+      if(storageState !== null) {
+        this.state = {courses: storageState};
+      } else {
+        this.state = {courses: []};
+      }
+
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -62,7 +69,8 @@ class Search extends Component {
 function handleResponse(state, response) {
   state.setState({courses: response.data.courses});
   console.log(state);
-  history.replaceState(state.state, "search");
+  storage.setItem("state", JSON.stringify(response.data.courses));
+  console.log(JSON.parse(storage.getItem("state")));
 }
 
 function Courses(props) {
