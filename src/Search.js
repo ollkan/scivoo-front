@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import querystring from 'query-string'
+import { Link } from 'react-router'
 import './App.css';
 
 class Search extends Component {
 
   constructor(props) {
       super(props);
+
       this.state = {courses: []};
 
       this.handleChange = this.handleChange.bind(this);
@@ -34,9 +36,8 @@ class Search extends Component {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }})
-      .then(response => this.setState(
-        {courses: response.data.courses}
-      ));
+      .then(response => handleResponse(this, response)
+      );
 
     }
 
@@ -58,8 +59,13 @@ class Search extends Component {
   );}
 }
 
+function handleResponse(state, response) {
+  state.setState({courses: response.data.courses});
+  console.log(state);
+  history.replaceState(state.state, "search");
+}
+
 function Courses(props) {
-  console.log(props);
   const courses = props.courses;
   const courseItems = courses.map((course) =>
     <div key={course.id} className="pure-g">
@@ -67,7 +73,7 @@ function Courses(props) {
       <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
         <div className="course">
         <p>
-        <a href="/courses/{course.id}">{course.id} - {course.name}</a>
+        <Link to={`/course/${course.id}`}>{course.id} - {course.name}</Link>
         <span className="periods">Periods: II</span>
         </p>
         <p className="course-prof">Teacher: {course.description}</p>

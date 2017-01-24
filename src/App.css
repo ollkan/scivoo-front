@@ -11,6 +11,10 @@ ul {
   padding: 0px;
 }
 
+h2 {
+  text-align: center;
+}
+
 .App {
   text-align: center;
 }
@@ -49,6 +53,10 @@ ul {
 
 .periods {
   float: right;
+}
+
+.courseData {
+  margin: 10px;
 }
 
 #searchinput {
