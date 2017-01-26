@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
+import {browserHistory} from 'react-router';
 import './App.css';
 
 class Header extends Component {
+
+  onHeaderClick() {
+    sessionStorage.clear();
+    browserHistory.push('/');
+  }
+
   render() {
     return (
         <div className="App-header">
-          <h2>SCIVOO</h2>
+          <h2 className="headerText" onClick={this.onHeaderClick.bind(this)}>SCIVOO</h2>
         </div>
     );
   }

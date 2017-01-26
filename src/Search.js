@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import querystring from 'query-string'
-import { Link } from 'react-router'
+import querystring from 'query-string';
+import { Link } from 'react-router';
+import SearchInput from './SearchInput';
 import './App.css';
 
-const storage = window.sessionStorage
+const storage = window.sessionStorage;
 class Search extends Component {
 
   constructor(props) {
@@ -17,16 +18,11 @@ class Search extends Component {
         this.state = {courses: []};
       }
 
-
-      this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
-      //this.setState({value: event.target.value});
-    }
 
-    handleSubmit(event) {
+    handleSubmit() {
       var points = document.getElementById("pointchoose").selectedIndex;
       var period = document.getElementById("periodchoose").selectedIndex;
       var search = document.getElementById("searchinput").value;
@@ -37,7 +33,6 @@ class Search extends Component {
         points: (points > 0) ? points.toString() : ''
       });
 
-      event.preventDefault();
       axios.post('http://thisismydomain.name/scivoo/api/search', query,
       {
         headers: {
@@ -51,16 +46,13 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} className="pure-form pure-form-stacked">
+        <div className="pure-form pure-form-stacked">
           <div className="pure-g">
-          <SearchInput/>
           <SelectPeriod/>
           <SelectPoints/>
-          <div className="pure-u-1">
-            <input type="submit" value="Submit" className="pure-button pure-button-primary"/>
+          <SearchInput handleSubmit={this.handleSubmit}/>
           </div>
-          </div>
-        </form>
+        </div>
         <Courses courses={this.state.courses}/>
       </div>
   );}
@@ -96,18 +88,6 @@ function Courses(props) {
     </div>
   );
 }
-
-function SearchInput() {
-  return(
-    <div className="pure-u-1">
-      <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
-      <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
-        <input id="searchinput" className="pure-input-1" type="text" name="search" placeholder="Search..."/>
-      </div>
-      <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
-    </div>
-  );
-};
 
 function SelectPeriod() {
   return(
@@ -149,5 +129,13 @@ function SelectPoints() {
     </div>
   );
 }
+
+/*function SearchButton() {
+  return(
+    <div className="pure-u-1">
+      <input type="submit" value="Submit" className="pure-button pure-button-primary"/>
+    </div>
+) ;
+}*/
 
 export default Search;
