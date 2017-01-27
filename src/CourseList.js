@@ -16,28 +16,36 @@ class CourseList extends Component {
 
 function CourseItems(props) {
   const data = props.courses.courses;
-  const rate = 2;
-  const items = data.map((course) =>
-    <div key={course.id} className="pure-g courseItem">
-      <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
-        <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
-          <div className="course">
-            <p className="courseLine">
-              <span>
-                <Link to={`/course/${course.id}`}>{course.id} - {course.name}, 5 ECTS, II Period</Link>
-                <StarSystem rating={rate}/>
-              </span>
-            </p>
-          </div>
-        </div>
-      <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
-    </div>
+  const items = data.map((course) => CourseItem(course)
   );
   return (
     <div>
       <ul>{items}</ul>
     </div>
   );
+}
+
+function CourseItem(props) {
+  const course = props;
+  const rate = 2;
+  const courseName = course.name.substring(0, 20);
+  const item =
+  <div key={course.id} className="pure-g">
+    <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
+      <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
+        <div className="course">
+          <p className="courseLine">
+            <span>
+              <Link to={`/course/${course.id}`}>{course.id} - {courseName}, 5 ECTS, II Period</Link>
+              <StarSystem rating={rate}/>
+            </span>
+          </p>
+        </div>
+      </div>
+    <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
+  </div>
+
+  return(item);
 }
 
 

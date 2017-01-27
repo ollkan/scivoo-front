@@ -37,3 +37,15 @@
     height: 16px;
     background: url('../images/star.png') 0 -16px;
   }
+
+  @media screen and (max-width: 700px) {
+    .unrated-star {
+      display: none !important;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .rated-star {
+      display: none !important;
+    }
+}
