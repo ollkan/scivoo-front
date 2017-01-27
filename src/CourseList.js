@@ -16,8 +16,8 @@ class CourseList extends Component {
 
 function CourseItems(props) {
   const data = props.courses.courses;
-  const items = data.map((course) => CourseItem(course)
-  );
+  const items = data.map((course) => CourseItem(course));
+
   return (
     <div>
       <ul>{items}</ul>

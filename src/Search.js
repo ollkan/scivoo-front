@@ -3,6 +3,7 @@ import axios from 'axios';
 import querystring from 'query-string';
 import SearchInput from './SearchInput';
 import CourseList from './CourseList'
+import config from './_environment.js'
 import './styles/App.css';
 
 const storage = window.sessionStorage;
@@ -10,6 +11,7 @@ class Search extends Component {
 
   constructor(props) {
       super(props);
+
       var storageState = JSON.parse(storage.getItem("state"));
 
       if(storageState !== null) {
@@ -29,11 +31,11 @@ class Search extends Component {
 
       var query = querystring.stringify({
         search: search,
-        period: (period > 0) ? period.toString() : '',
-        points: (points > 0) ? points.toString() : ''
+        period: (period > 0) ? period.toString() : 'Any',
+        points: (points > 0) ? points.toString() : 'Any'
       });
 
-      axios.post('http://thisismydomain.name/scivoo/api/search', query,
+      axios.post(config().dev + 'api/search', query,
       {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"

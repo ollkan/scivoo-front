@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import config from './_environment.js';
 import './styles/App.css';
 
 class Course extends Component {
@@ -7,28 +8,32 @@ class Course extends Component {
   constructor(props) {
       super(props);
       this.state = {data: {}};
-
     }
 
     componentDidMount() {
       getCourseData(this.props.params.id, this);
     }
 
+
   render() {
     return (
-      <div className="Course">
+      <div>
         <CourseData className="courseData" props={this.state.data}/>
+        <CommentList className="commentList" props={this.state.data}/>
       </div>
     );
   }
 }
 
 function getCourseData(path, state) {
-  axios.get('http://thisismydomain.name/scivoo/api/course/' + path)
-  .then(response => state.setState(
-    {data: response.data}
-  ));
+  axios.get(config().dev + 'api/course/' + path)
+  .then(response => handleResponse(response, state));
+};
+
+function handleResponse(response, state) {
+  state.setState({data: response.data});
 }
+
 
 function CourseData(props) {
   var data = props.props;
@@ -51,6 +56,26 @@ function CourseData(props) {
   }
 }
 
+function CommentList(props) {
+  const data = props.props.comments;
+  const items = (data !== undefined ? data.map((comment) => CommentItem(comment)) : <div/>);
+  return (
+    <div>
+      {items}
+    </div>
+  );
+}
+
+function CommentItem(props) {
+  return (
+    <div key={props.body}>
+      <IntentObject data={["Comment:", props.body]}/>
+      <IntentObject data={["Iteration:", props.iteration]}/>
+      <IntentObject data={["Rating:", props.rating]}/>
+    </div>
+  );
+}
+
 function IntentObject(props) {
   const header = props.data[0];
   const text = props.data[1];
@@ -67,5 +92,7 @@ function IntentObject(props) {
     </div>
   );
 }
+
+
 
 export default Course;
