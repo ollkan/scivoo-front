@@ -5,7 +5,7 @@ import Search from './Search'
 import Course from './Course'
 import { Router, Route, IndexRoute } from 'react-router';
 import { browserHistory } from 'react-router'
-import './index.css';
+import './styles/index.css';
 
 ReactDOM.render(
   <Router history={browserHistory}>

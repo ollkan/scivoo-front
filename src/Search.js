@@ -3,7 +3,7 @@ import axios from 'axios';
 import querystring from 'query-string';
 import SearchInput from './SearchInput';
 import CourseList from './CourseList'
-import './App.css';
+import './styles/App.css';
 
 const storage = window.sessionStorage;
 class Search extends Component {
@@ -95,13 +95,5 @@ function SelectPoints() {
     </div>
   );
 }
-
-/*function SearchButton() {
-  return(
-    <div className="pure-u-1">
-      <input type="submit" value="Submit" className="pure-button pure-button-primary"/>
-    </div>
-) ;
-}*/
 
 export default Search;

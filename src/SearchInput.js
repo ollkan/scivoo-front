@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {debounce} from 'throttle-debounce';
-import './App.css';
+import './styles/App.css';
 
 class SearchInput extends Component {
 

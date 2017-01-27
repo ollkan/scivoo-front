@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import './StarSystem.css'
-import './App.css';
+import './styles/StarSystem.css'
+import './styles/App.css';
 
 class CourseList extends Component {
 
@@ -18,7 +18,7 @@ function CourseItems(props) {
   const data = props.courses.courses;
   const rate = 2;
   const items = data.map((course) =>
-    <div key={course.id} className="pure-g">
+    <div key={course.id} className="pure-g courseItem">
       <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
         <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
           <div className="course">
