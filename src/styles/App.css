@@ -24,6 +24,7 @@ h2 {
 
 h3 {
   margin: 5px;
+  text-align: left;
 }
 
 .App {
@@ -82,10 +83,7 @@ h3 {
   border: 2px solid #eeeeee;
   background-color: #ffffff;
   border-radius: 5px;
-  margin: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
-  padding-left: 5px;
+  margin: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -100,6 +98,26 @@ h3 {
 
 .course-period {
   margin: 20px;
+}
+
+.comment {
+  text-align: left;
+  border: 2px solid #eeeeee;
+  background-color: #ffffff;
+  border-radius: 5px;
+  margin: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.commentInput {
+  width: 100%%;
+}
+
+.commentSelectors {
+  margin-top: 5px;
 }
 
 #searchinput {
@@ -117,4 +135,10 @@ h3 {
   width: 97%;
   margin-right: 2%;
   margin-left: 1%;
+}
+
+#inputButton {
+  width: 100%;
+  margin-top: 5px;
+  float: right;
 }

@@ -38,6 +38,24 @@
     background: url('../images/star.png') 0 -16px;
   }
 
+  .rated-star-v {
+    position: relative;
+    float: right;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url('../images/star.png') 0 0;
+  }
+
+  .unrated-star-v {
+    position: relative;
+    float: right;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url('../images/star.png') 0 -16px;
+  }
+
   @media screen and (max-width: 700px) {
     .unrated-star {
       display: none !important;

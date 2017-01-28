@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import config from './_environment.js';
+import querystring from 'query-string';
 import './styles/App.css';
 
 class Course extends Component {
 
   constructor(props) {
       super(props);
-      this.state = {data: {}};
+      this.state = {data: {}, comments: []};
     }
 
     componentDidMount() {
@@ -19,7 +20,12 @@ class Course extends Component {
     return (
       <div>
         <CourseData className="courseData" props={this.state.data}/>
-        <CommentList className="commentList" props={this.state.data}/>
+        <PostComment>
+          <PostCommentSelectors>
+            <InputButton commentCourse={commentCourse.bind(null, this)}/>
+          </PostCommentSelectors>
+        </PostComment>
+        <CommentList className="commentList" props={this.state.comments}/>
       </div>
     );
   }
@@ -31,7 +37,32 @@ function getCourseData(path, state) {
 };
 
 function handleResponse(response, state) {
-  state.setState({data: response.data});
+  state.setState({data: response.data, comments: response.data.comments});
+}
+
+function commentCourse(props) {
+  var body = document.getElementById("commentInput").value;
+  var grade = document.getElementById("gradeSelect").selectedIndex;
+  var iteration = document.getElementById("iterationSelect").value;
+
+  if(body.length < 1) {
+    document.getElementById("commentInput").style.borderColor = "red";
+  } else {
+    var query = querystring.stringify({
+      'body': body,
+      'rating': grade,
+      'iteration': iteration
+    });
+    const url = config().dev + 'api/comment/' + window.location.href.split("/").pop();
+    axios.post(url, query,
+    {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }})
+    .then(response => props.setState({comments: response.data.comments})
+  );
+  }
+
 }
 
 
@@ -57,8 +88,8 @@ function CourseData(props) {
 }
 
 function CommentList(props) {
-  const data = props.props.comments;
-  const items = (data !== undefined ? data.map((comment) => CommentItem(comment)) : <div/>);
+  const data = props.props.reverse();
+  const items = (data !== undefined ? data.map((comment, i) => CommentItem(comment, i)) : <div/>);
   return (
     <div>
       {items}
@@ -66,12 +97,27 @@ function CommentList(props) {
   );
 }
 
-function CommentItem(props) {
+function CommentItem(props, index) {
+  var arr = [1,2,3,4,5];
+  const ratedStars = arr.slice(5-props.rating).map((num) => <label key={num} className="rated-star-v"/>);
+  const unratedStars = arr.slice(props.rating).map((num) => <label key={num} className="unrated-star-v"/>);
   return (
-    <div key={props.body}>
-      <IntentObject data={["Comment:", props.body]}/>
-      <IntentObject data={["Iteration:", props.iteration]}/>
-      <IntentObject data={["Rating:", props.rating]}/>
+    <div key={index} className="pure-g">
+      <div className="pure-u-md-2-24 pure-u-lg-3-24"/>
+      <div className="pure-u-1 pure-u-md-20-24 pure-u-lg-18-24">
+        <div className="comment">
+          <p>
+            <span>
+              <b>{props.iteration}</b>
+            </span>
+            <span>
+              {unratedStars}{ratedStars}
+            </span>
+          </p>
+          <p>{props.body}</p>
+        </div>
+      </div>
+      <div className="pure-u-md-2-24 pure-u-lg-3-24"/>
     </div>
   );
 }
@@ -91,6 +137,75 @@ function IntentObject(props) {
       </div>
     </div>
   );
+}
+
+function PostComment(props) {
+
+  return (
+    <div className="pure-g">
+      <div className="pure-u-md-2-24 pure-u-lg-3-24"/>
+        <div className="pure-u-1 pure-u-md-20-24 pure-u-lg-18-24">
+        <div className="pure-form comment">
+          <h3>Comment</h3>
+          <textarea className="commentInput" id="commentInput"/>
+          {props.children}
+        </div>
+        </div>
+      <div className="pure-u-md-2-24 pure-u-lg-3-24"/>
+    </div>
+  );
+}
+
+function PostCommentSelectors(props) {
+  const iterations = getCourseIterations();
+  const options = iterations.map( (c, i) => <option key={i}>{c}</option>);
+  return (
+    <div className="pure-g pure-form pure-form-stacked commentSelectors">
+      <select className="pure-u-1-2" id="iterationSelect">
+        {options}
+      </select>
+      <select className="pure-u-1-2" id="gradeSelect">
+        <option>Grade - 0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+      {props.children}
+    </div>
+  );
+}
+
+function InputButton(props) {
+  return(
+    <input className="pure-button pure-button-primary" type="submit" id="inputButton" onClick={props.commentCourse}/>
+  );
+}
+
+function getCourseIterations() {
+  const courseIteration = [];
+  const iterations = ["Spring", "Summer", "Fall"];
+  const date = new Date();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+  if(month > 8) {
+    courseIteration.push(iterations[2] + " " + year);
+    courseIteration.push(iterations[1] + " " + year);
+    courseIteration.push(iterations[0] + " " + year);
+  } else if(month > 5) {
+    courseIteration.push(iterations[1] + " " + year);
+    courseIteration.push(iterations[0] + " " + year);
+  }
+  else {
+    courseIteration.push(iterations[0] + " " + year);
+  }
+
+  courseIteration.push(iterations[2] + " " + (year - 1));
+  courseIteration.push(iterations[1] + " " + (year - 1));
+  courseIteration.push(iterations[0] + " " + (year - 1));
+
+  return courseIteration;
 }
 
 
