@@ -76,9 +76,9 @@ function CourseData(props) {
         <div className="pure-u-md-2-24 pure-u-lg-3-24"/>
         <div className="pure-u-1 pure-u-md-20-24 pure-u-lg-18-24">
           <div className="courseData">
-          <h3>{data.id} - {data.name}</h3>
-          <IntentObject data={["Description:", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies maximus ullamcorper. Aliquam ac lobortis ligula, a posuere neque. Nulla vel risus porta, laoreet libero ac, tincidunt ipsum. Mauris sodales fermentum dui eget ultricies. Aliquam eu velit lectus. Aliquam suscipit, odio in vulputate pulvinar, orci felis volutpat libero, et semper nisl tortor a risus. Suspendisse in mi in orci fermentum euismod sed consectetur sapien. Integer sagittis eu sem ut porta. Sed laoreet lacus non aliquam dapibus. Etiam in nulla magna. Duis viverra tortor quis aliquam pharetra. Vivamus lobortis nulla vitae dolor sodales, id egestas tellus semper. Aliquam purus justo, pulvinar eu vehicula nec, pulvinar id nisl."]}/>
-          <IntentObject data={["Period:", data.period.split("").join("-")]}/>
+            <h3>{data.id} - {data.name}</h3>
+            <IntentObject data={["Description:", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies maximus ullamcorper. Aliquam ac lobortis ligula, a posuere neque. Nulla vel risus porta, laoreet libero ac, tincidunt ipsum. Mauris sodales fermentum dui eget ultricies. Aliquam eu velit lectus. Aliquam suscipit, odio in vulputate pulvinar, orci felis volutpat libero, et semper nisl tortor a risus. Suspendisse in mi in orci fermentum euismod sed consectetur sapien. Integer sagittis eu sem ut porta. Sed laoreet lacus non aliquam dapibus. Etiam in nulla magna. Duis viverra tortor quis aliquam pharetra. Vivamus lobortis nulla vitae dolor sodales, id egestas tellus semper. Aliquam purus justo, pulvinar eu vehicula nec, pulvinar id nisl."]}/>
+            <IntentObject data={["Period:", data.period.split("").join("-")]}/>
           </div>
         </div>
         <div className="pure-u-md-2-24 pure-u-lg-3-24"/>
@@ -147,7 +147,7 @@ function PostComment(props) {
         <div className="pure-u-1 pure-u-md-20-24 pure-u-lg-18-24">
         <div className="pure-form comment">
           <h3>Comment</h3>
-          <textarea className="commentInput" id="commentInput"/>
+          <textarea className="pure-u-1 commentInput" id="commentInput"/>
           {props.children}
         </div>
         </div>
