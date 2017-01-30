@@ -62,7 +62,7 @@
     }
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 550px) {
     .rated-star {
       display: none !important;
     }

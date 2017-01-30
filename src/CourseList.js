@@ -28,7 +28,7 @@ function CourseItems(props) {
 function CourseItem(props) {
   const course = props;
   const rate = 2;
-  const courseName = course.name.substring(0, 20);
+  const courseName = course.name.substring(0, 30);
   const item =
   <div key={course.id} className="pure-g">
     <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
@@ -36,7 +36,7 @@ function CourseItem(props) {
         <div className="course">
           <p className="courseLine">
             <span>
-              <Link to={`/course/${course.id}`}>{course.id} - {courseName}, 5 ECTS, II Period</Link>
+              <Link to={`/course/${course.id}`} className="courseListLink">{course.id} - {courseName}, 5 ECTS, II Period</Link>
               <StarSystem rating={rate}/>
             </span>
           </p>

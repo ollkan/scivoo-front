@@ -179,7 +179,7 @@ function PostCommentSelectors(props) {
 
 function InputButton(props) {
   return(
-    <input className="pure-button pure-button-primary" type="submit" id="inputButton" onClick={props.commentCourse}/>
+    <input className="pure-button pure-button-secondary" type="submit" id="inputButton" onClick={props.commentCourse}/>
   );
 }
 
@@ -207,7 +207,5 @@ function getCourseIterations() {
 
   return courseIteration;
 }
-
-
 
 export default Course;

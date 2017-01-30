@@ -84,7 +84,7 @@ function SelectPeriod() {
 };
 
 function SelectPoints() {
-  var options = [...Array(11).keys()].map(i => (i + 1) - 1).map(num => <option key={num}>{num}</option>);
+  var options = [...Array(10).keys()].map(i => (i + 1)).map(num => <option key={num}>{num}</option>);
   return(
     <div className="pure-u-1-2">
       <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">

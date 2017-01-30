@@ -124,6 +124,10 @@ textarea {
   margin-top: 5px;
 }
 
+.courseListLink {
+  text-overflow: ellipsis;
+}
+
 #searchinput {
   width: 98%;
   margin: 1%;
@@ -145,5 +149,10 @@ textarea {
   width: 100%;
   margin-top: 5px;
   float: right;
+  color: white;
   background: rgb(28, 184, 65);
+}
+
+#inputButton:hover {
+  box-shadow: 150px 50px 10px #888888;
 }
