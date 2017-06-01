@@ -40,8 +40,7 @@ class Search extends Component {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }})
-      .then(response => handleResponse(this, response)
-      );
+      .then(response => handleResponse(this, response));
 
     }
 
