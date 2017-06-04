@@ -27,7 +27,7 @@ function CourseItems(props) {
 
 function CourseItem(props) {
   const course = props;
-  const courseName = course.name.substring(0, 30);
+  const courseName = course.name.length > 30 ? course.name.substring(0, 30) + '...':course.name;
   const rating = Math.round(course.rating);
   const item =
   <div key={course.id} className="pure-g">

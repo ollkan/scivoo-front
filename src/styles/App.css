@@ -156,3 +156,11 @@ textarea {
 #inputButton:hover {
   box-shadow: 150px 50px 10px #888888;
 }
+
+#loginUsername {
+  margin-top: 20px
+}
+
+#loginButton {
+  margin-top: 10px
+}
