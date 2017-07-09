@@ -73,15 +73,15 @@ function CourseData(props) {
   } else {
     return (
       <div key={data.id} className="pure-g">
-        <div className="pure-u-md-2-24 pure-u-lg-3-24"/>
-        <div className="pure-u-1 pure-u-md-20-24 pure-u-lg-18-24">
-          <div className="courseData">
-            <h3>{data.id} - {data.name}</h3>
-            <IntentObject data={["Description:", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies maximus ullamcorper. Aliquam ac lobortis ligula, a posuere neque. Nulla vel risus porta, laoreet libero ac, tincidunt ipsum. Mauris sodales fermentum dui eget ultricies. Aliquam eu velit lectus. Aliquam suscipit, odio in vulputate pulvinar, orci felis volutpat libero, et semper nisl tortor a risus. Suspendisse in mi in orci fermentum euismod sed consectetur sapien. Integer sagittis eu sem ut porta. Sed laoreet lacus non aliquam dapibus. Etiam in nulla magna. Duis viverra tortor quis aliquam pharetra. Vivamus lobortis nulla vitae dolor sodales, id egestas tellus semper. Aliquam purus justo, pulvinar eu vehicula nec, pulvinar id nisl."]}/>
-            <IntentObject data={["Period:", data.period.split("").join("-")]}/>
+      <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
+      <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
+            <div className="courseData">
+              <h3>{data.id} - {data.name}</h3>
+              <IntentObject data={["Description:", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies maximus ullamcorper. Aliquam ac lobortis ligula, a posuere neque. Nulla vel risus porta, laoreet libero ac, tincidunt ipsum. Mauris sodales fermentum dui eget ultricies. Aliquam eu velit lectus. Aliquam suscipit, odio in vulputate pulvinar, orci felis volutpat libero, et semper nisl tortor a risus. Suspendisse in mi in orci fermentum euismod sed consectetur sapien. Integer sagittis eu sem ut porta. Sed laoreet lacus non aliquam dapibus. Etiam in nulla magna. Duis viverra tortor quis aliquam pharetra. Vivamus lobortis nulla vitae dolor sodales, id egestas tellus semper. Aliquam purus justo, pulvinar eu vehicula nec, pulvinar id nisl."]}/>
+              <IntentObject data={["Period:", data.period.split("").join("-")]}/>
+            </div>
           </div>
-        </div>
-        <div className="pure-u-md-2-24 pure-u-lg-3-24"/>
+        <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
       </div>
     );
   }
@@ -103,8 +103,8 @@ function CommentItem(props, index) {
   const unratedStars = arr.slice(props.rating).map((num) => <label key={num} className="unrated-star-v"/>);
   return (
     <div key={index} className="pure-g">
-      <div className="pure-u-md-2-24 pure-u-lg-3-24"/>
-      <div className="pure-u-1 pure-u-md-20-24 pure-u-lg-18-24">
+    <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
+    <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
         <div className="comment">
           <p>
             <span>
@@ -117,7 +117,7 @@ function CommentItem(props, index) {
           <p>{props.body}</p>
         </div>
       </div>
-      <div className="pure-u-md-2-24 pure-u-lg-3-24"/>
+      <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
     </div>
   );
 }
@@ -143,15 +143,15 @@ function PostComment(props) {
 
   return (
     <div className="pure-g">
-      <div className="pure-u-md-2-24 pure-u-lg-3-24"/>
-        <div className="pure-u-1 pure-u-md-20-24 pure-u-lg-18-24">
+    <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
+    <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
         <div className="pure-form comment">
           <h3>Comment</h3>
           <textarea className="pure-u-1 commentInput" id="commentInput"/>
           {props.children}
         </div>
         </div>
-      <div className="pure-u-md-2-24 pure-u-lg-3-24"/>
+      <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
     </div>
   );
 }

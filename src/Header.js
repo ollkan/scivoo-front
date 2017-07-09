@@ -12,7 +12,10 @@ class Header extends Component {
   render() {
     return (
         <div className="App-header">
-          <h2 className="headerText" onClick={this.onHeaderClick.bind(this)}>SCIVOO</h2>
+          <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
+            <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
+            <p className="headerText" onClick={this.onHeaderClick.bind(this)}>SCI varjo-opinto-opas</p>
+          </div>
         </div>
     );
   }

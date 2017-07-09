@@ -6,6 +6,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div id="bg">
+        </div>
         <Header/>
         {this.props.children}
       </div>

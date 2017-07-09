@@ -47,6 +47,13 @@ class Search extends Component {
   render() {
     return (
       <div>
+        <div className="pure-u-1-2">
+          <div className="pure-u-md-6-24 pure-u-lg-10-24"/>
+          <div className="pure-u-1 pure-u-md-12-24 pure-u-lg-4-24 search">
+            Search Courses
+          </div>
+          <div className="pure-u-md-6-24 pure-u-lg-10-24"/>
+        </div>
         <div className="pure-form pure-form-stacked">
           <div className="pure-g">
           <SelectPeriod/>

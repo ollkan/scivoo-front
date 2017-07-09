@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
+
 body {
  height: 100%;
  background-color: #f8f8f8;
+ font-family: 'Open Sans', sans-serif !important;
+
 }
 
 a {
@@ -31,41 +35,38 @@ textarea {
   resize: vertical;
 }
 
+.pure-g [class *= "pure-u"] {
+        font-family: 'Open Sans', sans-serif !important;
+}
+
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-header {
-  background-image: url('../images/books.jpg');
-  background-size: cover;
-  height: 150px;
+  height: 30px;
   padding: 0px;
-  margin: 0px;
+  margin-bottom: 5px;
   color: white;
   background-repeat: no-repeat;
-
+  text-align: left;
 }
 
-.App-header h2{
+.headerText{
   margin: 0px;
   padding: 5px;
-  background-color: #222;
-  opacity: 0.8;
+  background-color: #5b5b5b;
 }
 
 .course {
   text-align: left;
-  border: 2px solid #eeeeee;
-  background-color: #ffffff;
-  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.9);
   margin-right: 5px;
   margin-left: 5px;
   padding-left: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
   padding-right: 5px;
-  margin-top: 2px;
-  margin-bottom: 3px;
 }
 .courseLine {
   margin-right: 5px;
@@ -107,7 +108,7 @@ textarea {
 .comment {
   text-align: left;
   border: 2px solid #eeeeee;
-  background-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 5px;
   margin: 5px;
   padding-left: 20px;
@@ -163,4 +164,13 @@ textarea {
 
 #loginButton {
   margin-top: 10px
+}
+
+#bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url(../images/back2.jpg);
+  background-size: cover;
 }
