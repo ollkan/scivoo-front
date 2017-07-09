@@ -104,26 +104,19 @@ function CommentList(props) {
 }
 
 function CommentItem(props, index) {
-  var arr = [1,2,3,4,5];
-  const ratedStars = arr.slice(5-props.rating).map((num) => <label key={num} className="rated-star-v"/>);
-  const unratedStars = arr.slice(props.rating).map((num) => <label key={num} className="unrated-star-v"/>);
+  const ratedStars = Array(props.rating).fill(null).map((num, index) => <i key={index} className="fa fa-star" aria-hidden="true"></i>);
+  const workload = Array(props.rating).fill(null).map((num, index) => <i key={index} className="fa fa-ambulance" aria-hidden="true"></i>);
   return (
     <div key={index} className="pure-g">
     <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
     <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
-        <div className="comment">
-          <p>
-            <span>
-              <b>{props.iteration}</b>
-            </span>
-            <span>
-              {unratedStars}{ratedStars}
-            </span>
-          </p>
-          <p>{props.body}</p>
-        </div>
+      <div className="comment">
+        <p><b>{props.iteration}</b> <span>{ratedStars}</span></p>
+        <p><span>{workload}</span></p>
+        <p>{props.body}</p>
       </div>
-      <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
+    </div>
+    <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
     </div>
   );
 }
