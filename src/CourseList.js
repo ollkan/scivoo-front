@@ -39,16 +39,16 @@ class CourseList extends Component {
 
     switch (e) {
       case 'Lowest rating':
-        this.setState({courses: this.state.courses.sort(sortData('rating', false, parseInt))})
+        this.setState({courses: this.state.courses.sort(sortData('rating', false, parseFloat))})
         break;
       case 'Sort - Highest rating':
-        this.setState({courses: this.state.courses.sort(sortData('rating', true, parseInt))})
+        this.setState({courses: this.state.courses.sort(sortData('rating', true, parseFloat))})
         break;
       case 'Heaviest workload':
-        this.setState({courses: this.state.courses.sort(sortData('workload', false, parseInt))})
+        this.setState({courses: this.state.courses.sort(sortData('workload', false, parseFloat))})
         break;
       case 'Lightest workload':
-        this.setState({courses: this.state.courses.sort(sortData('workload', false, parseInt))})
+        this.setState({courses: this.state.courses.sort(sortData('workload', false, parseFloat))})
         break;
       default:
 
