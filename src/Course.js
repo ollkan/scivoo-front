@@ -79,7 +79,8 @@ function CourseData(props) {
       <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
             <div className="courseData">
               <h3>{data.id} - {data.name}</h3>
-              <IntentObject data={["Description:", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies maximus ullamcorper. Aliquam ac lobortis ligula, a posuere neque. Nulla vel risus porta, laoreet libero ac, tincidunt ipsum. Mauris sodales fermentum dui eget ultricies. Aliquam eu velit lectus. Aliquam suscipit, odio in vulputate pulvinar, orci felis volutpat libero, et semper nisl tortor a risus. Suspendisse in mi in orci fermentum euismod sed consectetur sapien. Integer sagittis eu sem ut porta. Sed laoreet lacus non aliquam dapibus. Etiam in nulla magna. Duis viverra tortor quis aliquam pharetra. Vivamus lobortis nulla vitae dolor sodales, id egestas tellus semper. Aliquam purus justo, pulvinar eu vehicula nec, pulvinar id nisl."]}/>
+              <IntentObject data={["Description:", data.desc_outcome]}/>
+              <IntentObject data={["Learning goals:", data.desc_content]}/>
               <IntentObject data={["Period:", data.period]}/>
               <IntentObject data={["Credits:", data.credit]}/>
               <IntentObject data={["Rating:", data.rating]}/>
@@ -143,6 +144,23 @@ function IntentObject(props) {
     </div>
   );
 }
+
+/*function IntentStarObject(props) {
+  const header = props.data[0];
+  const rating = props.data[1];
+  return (
+    <div className="course-description">
+      <div className="pure-g">
+        <div className="pure-u-8-24 pure-u-sm-7-24">
+          <b>{header}</b>
+        </div>
+        <div className="pure-u-16-24 pure-u-sm-17-24">
+          <StarSystem rating={rating}/>
+        </div>
+      </div>
+    </div>
+  );
+}*/
 
 function PostComment(props) {
 
@@ -220,5 +238,14 @@ function getCourseIterations() {
 
   return courseIteration;
 }
+
+/*function StarSystem(props) {
+  var arr = [1,2,3,4,5];
+  const ratedStars = arr.slice(5-props.rating).map((num) => <label key={num} className="rated-star"/>);
+  const unratedStars = arr.slice(props.rating).map((num) => <label key={num} className="unrated-star"/>);
+  return (
+    <span className="stars">{unratedStars}{ratedStars}</span>
+  )
+}*/
 
 export default Course;
