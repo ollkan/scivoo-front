@@ -140,6 +140,13 @@ textarea {
   margin-right: 1%;
 }
 
+#sortchoose {
+  width: 97%;
+  margin-left: 2%;
+  margin-right: 1%;
+  margin-top: 10px;
+}
+
 #pointchoose {
   width: 97%;
   margin-right: 2%;

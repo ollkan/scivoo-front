@@ -50,14 +50,14 @@ class Search extends Component {
         <div className="pure-u-1-2">
           <div className="pure-u-md-6-24 pure-u-lg-10-24"/>
           <div className="pure-u-1 pure-u-md-12-24 pure-u-lg-4-24 search">
-            Search Courses
+
           </div>
           <div className="pure-u-md-6-24 pure-u-lg-10-24"/>
         </div>
         <div className="pure-form pure-form-stacked">
           <div className="pure-g">
-          <SelectPeriod/>
-          <SelectPoints/>
+          <SelectPeriod handleSubmit={this.handleSubmit}/>
+          <SelectPoints handleSubmit={this.handleSubmit}/>
           <SearchInput handleSubmit={this.handleSubmit}/>
           </div>
         </div>
@@ -71,12 +71,12 @@ function handleResponse(state, response) {
   storage.setItem("state", JSON.stringify(response.data.courses));
 }
 
-function SelectPeriod() {
+function SelectPeriod(handleSubmit) {
   return(
     <div className="pure-u-1-2">
       <div className="pure-u-md-6-24 pure-u-lg-10-24"/>
       <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
-        <select id="periodchoose" className="pure-input">
+        <select id="periodchoose" className="pure-input" onChange={handleSubmit.handleSubmit}>
           <option>Period - Any</option>
           <option>I</option>
           <option>II</option>
@@ -89,12 +89,12 @@ function SelectPeriod() {
   );
 };
 
-function SelectPoints() {
+function SelectPoints(handleSubmit) {
   var options = [...Array(10).keys()].map(i => (i + 1)).map(num => <option key={num}>{num}</option>);
   return(
     <div className="pure-u-1-2">
       <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
-        <select id="pointchoose" className="pure-input">
+        <select id="pointchoose" className="pure-input" onChange={handleSubmit.handleSubmit}>
           <option>Credits - Any</option>
           {options}
         </select>

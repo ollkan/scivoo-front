@@ -18,11 +18,58 @@ function CourseItems(props) {
   const data = props.courses.courses;
   const items = data.map((course) => CourseItem(course));
 
-  return (
+  if(data.length > 0) {
+    return (
+      <div>
+        <SortResults data={data}/>
+        <ul>{items}</ul>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <ul>{items}</ul>
+      </div>
+    );
+  }
+
+
+}
+
+function SortResults(data) {
+  return(
     <div>
-      <ul>{items}</ul>
+    <div className="pure-u-1-2"/>
+    <div className="pure-u-1-8"/>
+    <div className="pure-u-1-3">
+      <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
+        <select id="sortchoose" className="pure-input" onChange={(e) =>sortData(e, data)}>
+          <option>Sort - Best first</option>
+          <option>Worst first</option>
+          <option>Workload first</option>
+        </select>
+      </div>
+    </div>
     </div>
   );
+};
+
+function sortData(e, data) {
+  switch (e.target.value) {
+    case 'Worst first':
+      console.log('worst')
+      console.log(data)
+
+      break;
+    case 'Sort - Best first':
+      console.log('best')
+      break;
+    case 'Workload first':
+      console.log('workload')
+      break;
+    default:
+
+  }
 }
 
 function CourseItem(props) {
@@ -36,7 +83,9 @@ function CourseItem(props) {
         <div className="course">
           <p className="courseLine">
             <span>
-              <Link to={`/course/${course.id}`} className="courseListLink">{course.id} - {courseName}, 5 ECTS, II Period</Link>
+              <Link to={`/course/${course.id}`}
+              className="courseListLink">{course.id} - {courseName}
+              , {course.credit} ECTS, {course.period} Period</Link>
               <StarSystem rating={rating}/>
             </span>
           </p>
