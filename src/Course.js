@@ -43,6 +43,7 @@ function handleResponse(response, state) {
 function commentCourse(props) {
   var body = document.getElementById("commentInput").value;
   var grade = document.getElementById("gradeSelect").selectedIndex;
+  var workload = document.getElementById("wordloadSelect").selectedIndex;
   var iteration = document.getElementById("iterationSelect").value;
 
   if(body.length < 1) {
@@ -51,6 +52,7 @@ function commentCourse(props) {
     var query = querystring.stringify({
       'body': body,
       'rating': grade,
+      'workload': workload,
       'iteration': iteration
     });
     const url = config().dev + 'api/comment/' + window.location.href.split("/").pop();
@@ -80,6 +82,7 @@ function CourseData(props) {
               <IntentObject data={["Description:", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies maximus ullamcorper. Aliquam ac lobortis ligula, a posuere neque. Nulla vel risus porta, laoreet libero ac, tincidunt ipsum. Mauris sodales fermentum dui eget ultricies. Aliquam eu velit lectus. Aliquam suscipit, odio in vulputate pulvinar, orci felis volutpat libero, et semper nisl tortor a risus. Suspendisse in mi in orci fermentum euismod sed consectetur sapien. Integer sagittis eu sem ut porta. Sed laoreet lacus non aliquam dapibus. Etiam in nulla magna. Duis viverra tortor quis aliquam pharetra. Vivamus lobortis nulla vitae dolor sodales, id egestas tellus semper. Aliquam purus justo, pulvinar eu vehicula nec, pulvinar id nisl."]}/>
               <IntentObject data={["Period:", data.period]}/>
               <IntentObject data={["Credits:", data.credit]}/>
+              <IntentObject data={["Workload:", data.workload]}/>
             </div>
           </div>
         <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
@@ -162,11 +165,19 @@ function PostCommentSelectors(props) {
   const options = iterations.map( (c, i) => <option key={i}>{c}</option>);
   return (
     <div className="pure-g pure-form pure-form-stacked commentSelectors">
-      <select className="pure-u-1-2" id="iterationSelect">
+      <select className="pure-u-1-3" id="iterationSelect">
         {options}
       </select>
-      <select className="pure-u-1-2" id="gradeSelect">
+      <select className="pure-u-1-3" id="gradeSelect">
         <option>Grade - 0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+      <select className="pure-u-1-3" id="gradeSelect">
+        <option>Workload - 0</option>
         <option>1</option>
         <option>2</option>
         <option>3</option>

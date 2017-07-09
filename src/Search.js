@@ -32,7 +32,7 @@ class Search extends Component {
       var query = querystring.stringify({
         search: search,
         period: (period > 0) ? period.toString() : 'Any',
-        points: (points > 0) ? points.toString() : 'Any'
+        credit: (points > 0) ? points.toString() : 'Any'
       });
 
       axios.post(config().dev + 'api/search', query,
