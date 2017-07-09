@@ -83,8 +83,8 @@ function CourseData(props) {
               <IntentObject data={["Learning goals:", data.desc_content]}/>
               <IntentObject data={["Period:", data.period]}/>
               <IntentObject data={["Credits:", data.credit]}/>
-              <IntentStarObject data={["Rating:", data.rating]}/>
-              <IntentStarObject data={["Workload:", data.workload]}/>
+              <IntentStarObject data={["Rating:", data.rating, true]}/>
+              <IntentStarObject data={["Workload:", data.workload, false]}/>
             </div>
           </div>
         <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
@@ -155,7 +155,7 @@ function IntentStarObject(props) {
           <b>{header}</b>
         </div>
         <div className="pure-u-16-24 pure-u-sm-17-24">
-          <StarSystem rating={rating}/>
+          <StarSystem rating={rating} icon={props.data[2]}/>
         </div>
       </div>
     </div>
@@ -241,7 +241,11 @@ function getCourseIterations() {
 
 function StarSystem(props) {
   var arr = [1,2,3,4,5];
-  const ratedStars = arr.slice(5-props.rating).map((num) => <i key={num} className="fa fa-star star-left" aria-hidden="true"></i>);
+  console.log(props.rating)
+  const ratedStars = arr.slice(5-props.rating).map((num) => (
+    props.icon ? <i key={num} className="fa fa-star star-left" aria-hidden="true"></i>
+    : <i key={num} className="fa fa-ambulance star-left" aria-hidden="true"></i>
+  ))
   return (
     <span className="stars">{ratedStars}</span>
   )
