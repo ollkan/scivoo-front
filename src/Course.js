@@ -241,7 +241,6 @@ function getCourseIterations() {
 
 function StarSystem(props) {
   var arr = [1,2,3,4,5];
-  console.log(props.rating)
   const ratedStars = arr.slice(5-props.rating).map((num) => (
     props.icon ? <i key={num} className="fa fa-star star-left" aria-hidden="true"></i>
     : <i key={num} className="fa fa-ambulance star-left" aria-hidden="true"></i>
