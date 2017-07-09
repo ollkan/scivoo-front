@@ -105,7 +105,7 @@ function CommentList(props) {
 
 function CommentItem(props, index) {
   const ratedStars = Array(props.rating).fill(null).map((num, index) => <i key={index} className="fa fa-star" aria-hidden="true"></i>);
-  const workload = Array(props.rating).fill(null).map((num, index) => <i key={index} className="fa fa-ambulance" aria-hidden="true"></i>);
+  const workload = Array(props.workload).fill(null).map((num, index) => <i key={index} className="fa fa-ambulance" aria-hidden="true"></i>);
   return (
     <div key={index} className="pure-g">
     <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
