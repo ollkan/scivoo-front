@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import './styles/StarSystem.css';
 import './styles/App.css';
 
 class CourseList extends Component {
@@ -15,12 +14,16 @@ class CourseList extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({courses: nextProps.courses})
+    this.setState({courses: nextProps.courses}, () => {
+    const el = document.getElementById("sortchoose");
+    !!el ?
+      this.sortData(el.options[el.selectedIndex].value) :
+      this.sortData('Sort - Highest rating')
+    })
   }
 
   sortData(e) {
-    console.log(e)
-    var sortData = function(field, reverse, primer){
+    const sortData = (field, reverse, primer) => {
 
        var key = primer ?
            function(x) {return primer(x[field])} :
@@ -35,16 +38,16 @@ class CourseList extends Component {
     }
 
     switch (e) {
-      case 'Worst first':
+      case 'Lowest rating':
         this.setState({courses: this.state.courses.sort(sortData('rating', false, parseInt))})
         break;
-      case 'Sort - Best first':
+      case 'Sort - Highest rating':
         this.setState({courses: this.state.courses.sort(sortData('rating', true, parseInt))})
         break;
-      case 'Workload heviest first':
+      case 'Heaviest workload':
         this.setState({courses: this.state.courses.sort(sortData('workload', false, parseInt))})
         break;
-      case 'Workload lightest first':
+      case 'Lightest workload':
         this.setState({courses: this.state.courses.sort(sortData('workload', false, parseInt))})
         break;
       default:
@@ -75,15 +78,17 @@ function SortResults(props) {
   return(
     <div>
     <div className="pure-u-1-2"/>
-    <div className="pure-u-1-8"/>
-    <div className="pure-u-1-3">
+      <div className="pure-u-1-2">
       <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
-        <select id="sortchoose" className="pure-input" onChange={(e) => props.sort(e.target.value)}>
-          <option>Sort - Best first</option>
-          <option>Worst first</option>
-          <option>Workload heaviest first</option>
-          <option>Workload lightest first</option>
-        </select>
+        <div className="pure-u-1-2"/>
+        <div className="pure-u-1-2">
+          <select id="sortchoose" className="pure-input" onChange={(e) => props.sort(e.target.value)}>
+            <option>Sort - Highest rating</option>
+            <option>Lowest rating</option>
+            <option>Heaviest workload</option>
+            <option>Lightest workload</option>
+          </select>
+        </div>
       </div>
     </div>
     </div>
@@ -118,10 +123,9 @@ function CourseItem(props) {
 
 function StarSystem(props) {
   var arr = [1,2,3,4,5];
-  const ratedStars = arr.slice(5-props.rating).map((num) => <label key={num} className="rated-star"/>);
-  const unratedStars = arr.slice(props.rating).map((num) => <label key={num} className="unrated-star"/>);
+  const ratedStars = arr.slice(5-props.rating).map((num) => <i key={num} className="fa fa-star" aria-hidden="true"></i>);
   return (
-    <span className="stars">{unratedStars}{ratedStars}</span>
+    <span className="stars">{ratedStars}</span>
   )
 }
 

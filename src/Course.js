@@ -83,8 +83,8 @@ function CourseData(props) {
               <IntentObject data={["Learning goals:", data.desc_content]}/>
               <IntentObject data={["Period:", data.period]}/>
               <IntentObject data={["Credits:", data.credit]}/>
-              <IntentObject data={["Rating:", data.rating]}/>
-              <IntentObject data={["Workload:", data.workload]}/>
+              <IntentStarObject data={["Rating:", data.rating]}/>
+              <IntentStarObject data={["Workload:", data.workload]}/>
             </div>
           </div>
         <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
@@ -145,7 +145,7 @@ function IntentObject(props) {
   );
 }
 
-/*function IntentStarObject(props) {
+function IntentStarObject(props) {
   const header = props.data[0];
   const rating = props.data[1];
   return (
@@ -160,7 +160,7 @@ function IntentObject(props) {
       </div>
     </div>
   );
-}*/
+}
 
 function PostComment(props) {
 
@@ -239,13 +239,12 @@ function getCourseIterations() {
   return courseIteration;
 }
 
-/*function StarSystem(props) {
+function StarSystem(props) {
   var arr = [1,2,3,4,5];
-  const ratedStars = arr.slice(5-props.rating).map((num) => <label key={num} className="rated-star"/>);
-  const unratedStars = arr.slice(props.rating).map((num) => <label key={num} className="unrated-star"/>);
+  const ratedStars = arr.slice(5-props.rating).map((num) => <i key={num} className="fa fa-star star-left" aria-hidden="true"></i>);
   return (
-    <span className="stars">{unratedStars}{ratedStars}</span>
+    <span className="stars">{ratedStars}</span>
   )
-}*/
+}
 
 export default Course;
