@@ -43,7 +43,7 @@ function handleResponse(response, state) {
 function commentCourse(props) {
   var body = document.getElementById("commentInput").value;
   var grade = document.getElementById("gradeSelect").selectedIndex;
-  var workload = document.getElementById("wordloadSelect").selectedIndex;
+  var workload = document.getElementById("workloadSelect").selectedIndex;
   var iteration = document.getElementById("iterationSelect").value;
 
   if(body.length < 1) {
@@ -82,6 +82,7 @@ function CourseData(props) {
               <IntentObject data={["Description:", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ultricies maximus ullamcorper. Aliquam ac lobortis ligula, a posuere neque. Nulla vel risus porta, laoreet libero ac, tincidunt ipsum. Mauris sodales fermentum dui eget ultricies. Aliquam eu velit lectus. Aliquam suscipit, odio in vulputate pulvinar, orci felis volutpat libero, et semper nisl tortor a risus. Suspendisse in mi in orci fermentum euismod sed consectetur sapien. Integer sagittis eu sem ut porta. Sed laoreet lacus non aliquam dapibus. Etiam in nulla magna. Duis viverra tortor quis aliquam pharetra. Vivamus lobortis nulla vitae dolor sodales, id egestas tellus semper. Aliquam purus justo, pulvinar eu vehicula nec, pulvinar id nisl."]}/>
               <IntentObject data={["Period:", data.period]}/>
               <IntentObject data={["Credits:", data.credit]}/>
+              <IntentObject data={["Rating:", data.rating]}/>
               <IntentObject data={["Workload:", data.workload]}/>
             </div>
           </div>
@@ -176,7 +177,7 @@ function PostCommentSelectors(props) {
         <option>4</option>
         <option>5</option>
       </select>
-      <select className="pure-u-1-3" id="gradeSelect">
+      <select className="pure-u-1-3" id="workloadSelect">
         <option>Workload - 0</option>
         <option>1</option>
         <option>2</option>

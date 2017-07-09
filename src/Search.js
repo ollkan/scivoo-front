@@ -23,6 +23,10 @@ class Search extends Component {
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillReceiveProps() {
+      console.log('lol')
+    }
+
 
     handleSubmit() {
       var points = document.getElementById("pointchoose").selectedIndex;
