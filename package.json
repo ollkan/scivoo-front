@@ -2,7 +2,7 @@
   "name": "scivoo-front",
   "version": "0.2.0",
   "private": true,
-  "homepage" : "http://thisismydomain.name",
+  "homepage" : "http://tietokilta.fi/scivoo",
   "devDependencies": {
     "react-scripts": "1.0.7"
   },
