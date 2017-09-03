@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import {browserHistory} from 'react-router';
+import { browserHistory } from 'react-router';
 import './styles/App.css';
 
 class Header extends Component {
 
   onHeaderClick() {
-    sessionStorage.clear();
+    sessionStorage.removeItem('state');
     browserHistory.push('/');
   }
 

@@ -8,7 +8,7 @@ class Course extends Component {
 
   constructor(props) {
       super(props);
-      this.state = {data: {}, comments: []};
+      this.state = {data: {}, comments: [], isAdmin: !!sessionStorage.getItem('token')};
     }
 
     componentDidMount() {
@@ -25,7 +25,7 @@ class Course extends Component {
             <InputButton commentCourse={commentCourse.bind(null, this)}/>
           </PostCommentSelectors>
         </PostComment>
-        <CommentList className="commentList" props={this.state.comments}/>
+        <CommentList className="commentList" state={this} admin={this.state.isAdmin}/>
       </div>
     );
   }
@@ -38,6 +38,10 @@ function getCourseData(path, state) {
 
 function handleResponse(response, state) {
   state.setState({data: response.data, comments: response.data.comments});
+}
+
+function handleDeleteResponse(response, state) {
+  state.setState({comments: response.data.comments});
 }
 
 function commentCourse(props) {
@@ -61,7 +65,10 @@ function commentCourse(props) {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       }})
-    .then(response => props.setState({comments: response.data.comments})
+    .then(response => {
+      props.setState({comments: response.data.comments});
+      document.getElementById("commentInput").value = "";
+    }
   );
   }
 
@@ -83,6 +90,7 @@ function CourseData(props) {
               <IntentObject data={["Learning goals:", data.desc_content]}/>
               <IntentObject data={["Period:", data.period]}/>
               <IntentObject data={["Credits:", data.credit]}/>
+              <IntentObject data={["Oodi:", <a href={"https://oodi.aalto.fi/a/opintjakstied.jsp?html=1&Kieli=4&Tunniste=" + data.id}>Enroll in Oodi</a>]}/>
               <IntentStarObject data={["Rating:", data.rating, true]}/>
               <IntentStarObject data={["Workload:", data.workload, false]}/>
             </div>
@@ -94,8 +102,9 @@ function CourseData(props) {
 }
 
 function CommentList(props) {
-  const data = props.props.reverse();
-  const items = (data !== undefined ? data.map((comment, i) => CommentItem(comment, i)) : <div/>);
+  const data = props.state.state.comments.reverse();
+  const isAdmin = props.admin;
+  const items = (data !== undefined ? data.map((comment, i) => CommentItem(comment, i, isAdmin, props.state)) : <div/>);
   return (
     <div>
       {items}
@@ -103,13 +112,31 @@ function CommentList(props) {
   );
 }
 
-function CommentItem(props, index) {
+function deleteComment(e, comment, state) {
+  const token = sessionStorage.getItem('token');
+  const url = config().dev + 'api/comment/remove/' + comment.id;
+  const query = querystring.stringify({
+    'token': token
+  });
+  console.log(state)
+  axios.post(url, query,
+  {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    }}).then(response => {
+      if(!!response.data.comments) handleDeleteResponse(response, state);
+      else alert('Session expired')
+    })
+}
+
+function CommentItem(props, index, isAdmin, state) {
   const ratedStars = Array(props.rating).fill(null).map((num, index) => <i key={index} className="fa fa-star" aria-hidden="true"></i>);
   const workload = Array(props.workload).fill(null).map((num, index) => <i key={index} className="fa fa-ambulance" aria-hidden="true"></i>);
   return (
     <div key={index} className="pure-g">
     <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
     <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
+    {isAdmin && <i className="fa fa-times" aria-hidden="true" style={{margin: '10px'}} onClick={(e) => deleteComment(e, props, state)}/>}
       <div className="comment">
         <p><b>{props.iteration}</b> <span>{ratedStars}</span></p>
         <p><span>{workload}</span></p>
@@ -181,7 +208,7 @@ function PostCommentSelectors(props) {
         {options}
       </select>
       <select className="pure-u-1-3" id="gradeSelect">
-        <option>Grade - 0</option>
+        <option>Rating - 0</option>
         <option>1</option>
         <option>2</option>
         <option>3</option>

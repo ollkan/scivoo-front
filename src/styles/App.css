@@ -169,7 +169,8 @@ textarea {
 }
 
 #inputButton:hover {
-  box-shadow: 150px 50px 10px #888888;
+  /*box-shadow: 150px 50px 10px #888888;*/
+  background: rgb(28, 200, 65);
 }
 
 #loginUsername {
