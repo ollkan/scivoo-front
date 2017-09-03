@@ -108,7 +108,7 @@ function CourseItem(props) {
             <span>
               <Link to={`/course/${course.id}`}
               className="courseListLink">{course.id} - {courseName}
-              , {course.credit} ECTS, {course.period} Period</Link>
+              , {course.credit} ECTS, Period {course.period}</Link>
               <StarSystem rating={rating}/>
             </span>
           </p>
