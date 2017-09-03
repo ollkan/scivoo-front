@@ -1,6 +1,6 @@
 export default (config) => ({
   local:'localhost:8080/',
-  dev : 'http://thisismydomain.name/',
+  dev : 'http://tietokilta.fi/scivoo',
   initialRoute: '/',
   courseRoute: 'course/:id',
   loginRoute: '/login',
