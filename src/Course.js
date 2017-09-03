@@ -118,7 +118,6 @@ function deleteComment(e, comment, state) {
   const query = querystring.stringify({
     'token': token
   });
-  console.log(state)
   axios.post(url, query,
   {
     headers: {

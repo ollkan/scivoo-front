@@ -28,13 +28,11 @@ class Login extends Component {
   }
 
   handleFailedAuth() {
-    console.log('fail')
     this.setState({password: '', fail: 'Incorrect username or password'})
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
 
     let query = querystring.stringify({
       username: this.state.username,

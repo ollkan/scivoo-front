@@ -8,7 +8,6 @@ class Admin extends Component {
 
   componentWillMount() {
     let token = storage.getItem("token");
-    console.log(token);
     this.redirectToLogin =this.redirectToLogin.bind(this);
 
     if(!token) {
