@@ -2,7 +2,7 @@
   "name": "scivoo-front",
   "version": "0.2.0",
   "private": true,
-  "homepage" : "http://cannarit.fi/scivoo",
+  "homepage" : "http://varjoopintoopas.fi",
   "devDependencies": {
     "react-scripts": "1.0.7"
   },
