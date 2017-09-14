@@ -53,7 +53,7 @@ function commentCourse(props) {
   if(body.length < 1) {
     document.getElementById("commentInput").style.borderColor = "red";
   } else {
-    var query = querystring.stringify({
+    const query = querystring.stringify({
       'body': body,
       'rating': grade,
       'workload': workload,
