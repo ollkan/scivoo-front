@@ -3,6 +3,9 @@
 # dependencies
 node_modules
 
+#environment
+./src/_environment.js
+
 # testing
 coverage
 

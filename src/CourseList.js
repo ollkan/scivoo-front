@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import './styles/App.css';
+import Info from './Info'
 
 class CourseList extends Component {
 
@@ -67,7 +68,7 @@ class CourseList extends Component {
     } else {
       return (
         <div>
-          <ul>{items}</ul>
+          <Info/>
         </div>
       );
     }
@@ -97,20 +98,21 @@ function SortResults(props) {
 
 function CourseItem(props) {
   const course = props;
-  const courseName = course.name.length > 22 ? course.name.substring(0, 22) + '...':course.name;
+  const courseName = course.name;
   const rating = Math.round(course.rating);
   const item =
   <div key={course.id} className="pure-g">
     <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
       <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
         <div className="course">
-          <p className="courseLine">
+          <p className="courseLineTop">
             <span>
-              <Link to={`/course/${course.id}`}
-              className="courseListLink">{course.id} - {courseName}
-              , {course.credit} ECTS, Period {course.period}</Link>
+              {course.id} &ensp; {course.credit} ECTS &ensp; Period: {course.period}
               <StarSystem rating={rating}/>
             </span>
+          </p>
+          <p className="courseLineBottom">
+          <Link to={`/course/${course.id}`} className="courseListLink">{courseName}</Link>
           </p>
         </div>
       </div>

@@ -265,7 +265,7 @@ function StarSystem(props) {
     : <i key={num} className="fa fa-ambulance star-left" aria-hidden="true"></i>
   ))
   return (
-    <span className="stars">{ratedStars}</span>
+    <span className="stars">{ratedStars} ({Math.round((props.rating) * 100) / 100})</span>
   )
 }
 

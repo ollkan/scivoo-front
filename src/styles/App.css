@@ -68,7 +68,27 @@ textarea {
   padding-bottom: 10px;
   padding-right: 5px;
 }
-.courseLine {
+
+.info {
+  text-align: left;
+  background-color: rgba(255, 255, 255, 0.9);
+  margin-top: 30px;
+  margin-left: 5px;
+  padding: 10px
+}
+
+.infoList {
+  padding-left: 30px;
+}
+
+.courseLineTop {
+  font-size: 12px;
+  margin-right: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.courseLineBottom {
   margin-right: 5px;
   margin-top: 0px;
   margin-bottom: 0px;
