@@ -35,6 +35,10 @@ textarea {
   resize: vertical;
 }
 
+.pure-g:nth-child(even) .course {
+    background-color: rgba(245, 245, 245, 0.9);
+}
+
 .pure-g [class *= "pure-u"] {
         font-family: 'Open Sans', sans-serif !important;
 }
@@ -61,7 +65,6 @@ textarea {
 .course {
   text-align: left;
   background-color: rgba(255, 255, 255, 0.9);
-
   margin-left: 5px;
   padding-left: 10px;
   padding-top: 10px;
