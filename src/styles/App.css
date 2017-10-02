@@ -208,9 +208,11 @@ textarea {
 
 #bg {
   position: fixed;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   z-index: -1;
   background-image: url(../images/back2.jpg);
+  background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
