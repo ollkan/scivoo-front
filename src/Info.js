@@ -11,8 +11,7 @@ class Info extends Component {
             <div className="info">
               <h3>Welcome to Varjo-opinto-opas!</h3>
               <p>
-                In Varjo-opinto-opas you can search Aalto University School of
-                Science courses by their number of credits and/or the teaching periods of
+                In Varjo-opinto-opas you can search Aalto University courses by their number of credits and/or the teaching periods of
                 the course. You can also read comments about the course from fellow students
                 and comment the course yourself.
               </p>
@@ -45,6 +44,11 @@ class Info extends Component {
                comments will not be forwarded to the University. This is purely a
                project by students for students. In the case of problems contact
                the person responsible for study affairs in your guild.
+              </p>
+              <p>
+              <a href="https://goo.gl/forms/mWVL1HK79jdmM73N2">
+                <b>If you find bugs or have feedback please let us know</b>
+              </a>
               </p>
             </div>
           </div>

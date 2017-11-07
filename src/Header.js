@@ -14,7 +14,7 @@ class Header extends Component {
         <div className="App-header">
           <div className="pure-u-md-3-24 pure-u-lg-5-24"/>
             <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
-            <p className="headerText" onClick={this.onHeaderClick.bind(this)}>SCI varjo-opinto-opas</p>
+            <p className="headerText" onClick={this.onHeaderClick.bind(this)}>Varjo-opinto-opas</p>
           </div>
         </div>
     );
