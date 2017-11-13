@@ -1,6 +1,6 @@
 export default (config) => ({
   local:'localhost:8080/',
-  dev : '/',
+  dev : 'http://varjoopintoopas.fi/',
   initialRoute: '/',
   courseRoute: 'course/:id',
   loginRoute: '/login',

@@ -15,24 +15,36 @@ class Search extends Component {
       var storageState = JSON.parse(storage.getItem("state"));
 
       if(storageState !== null) {
-        this.state = {courses: storageState};
+        this.state = {courses: storageState, more: true};
       } else {
-        this.state = {courses: []};
+        this.state = {courses: [], more: true};
       }
 
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleMore = this.handleMore.bind(this);
     }
 
 
-    handleSubmit() {
-      var points = document.getElementById("pointchoose").selectedIndex;
-      var period = document.getElementById("periodchoose").selectedIndex;
-      var search = document.getElementById("searchinput").value;
+    handleSubmit(newQuery) {
+      const oldQuery = JSON.parse(storage.getItem("lastQuery"))
+      const points = newQuery ? document.getElementById("pointchoose").selectedIndex : oldQuery.points
+      const period = newQuery ? document.getElementById("periodchoose").selectedIndex : oldQuery.period
+      const search = newQuery ? document.getElementById("searchinput").value : oldQuery.search
+      const rating = storage.getItem("sort") || "rating desc"
 
-      var query = querystring.stringify({
+      const lastQuery = {
+        points: points,
+        period: period,
+        search: search
+      }
+
+      storage.setItem("lastQuery", JSON.stringify(lastQuery));
+
+      const query = querystring.stringify({
         search: search,
         period: (period > 0) ? period.toString() : 'Any',
-        credit: (points > 0) ? points.toString() : 'Any'
+        credit: (points > 0) ? points.toString() : 'Any',
+        sort: rating
       });
 
       axios.post(config().dev + 'api/search', query,
@@ -42,6 +54,31 @@ class Search extends Component {
         }})
       .then(response => handleResponse(this, response));
 
+    }
+
+    handleMore() {
+      const lastQuery = JSON.parse(storage.getItem("lastQuery"));
+      const points = lastQuery.points;
+      const period = lastQuery.period;
+      const search = lastQuery.search;
+      const offset = JSON.parse(storage.getItem("state"))
+      const rating = storage.getItem("sort") || "rating desc"
+      const l = offset.length
+
+      const query = querystring.stringify({
+        search: search,
+        period: (period > 0) ? period.toString() : 'Any',
+        credit: (points > 0) ? points.toString() : 'Any',
+        offset: l,
+        sort: rating
+      });
+
+      axios.post(config().dev + 'api/search', query,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }})
+      .then(response => handleMoreResponse(this, response, l));
     }
 
   render() {
@@ -61,13 +98,21 @@ class Search extends Component {
           <SearchInput handleSubmit={this.handleSubmit}/>
           </div>
         </div>
-        <CourseList courses={this.state.courses}/>
+        <CourseList courses={this.state.courses} handleSubmit={this.handleSubmit}/>
+        <More handleMore={this.handleMore} state={this.state}/>
       </div>
   );}
 }
 
+function handleMoreResponse(state, response, old) {
+  const n = JSON.parse(storage.getItem("state")).concat(response.data.courses)
+  state.setState({courses: n});
+  storage.setItem("state", JSON.stringify(JSON.parse(storage.getItem("state")).concat(response.data.courses)));
+  if(n.length === old) state.setState({more: false})
+}
+
 function handleResponse(state, response) {
-  state.setState({courses: response.data.courses});
+  state.setState({courses: response.data.courses, more: true});
   storage.setItem("state", JSON.stringify(response.data.courses));
 }
 
@@ -76,7 +121,7 @@ function SelectPeriod(handleSubmit) {
     <div className="pure-u-1-2">
       <div className="pure-u-md-6-24 pure-u-lg-10-24"/>
       <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
-        <select id="periodchoose" className="pure-input" onChange={handleSubmit.handleSubmit}>
+        <select id="periodchoose" className="pure-input" onChange={handleSubmit.handleSubmit.bind(true)}>
           <option>Period - Any</option>
           <option>I</option>
           <option>II</option>
@@ -94,7 +139,7 @@ function SelectPoints(handleSubmit) {
   return(
     <div className="pure-u-1-2">
       <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
-        <select id="pointchoose" className="pure-input" onChange={handleSubmit.handleSubmit}>
+        <select id="pointchoose" className="pure-input" onChange={handleSubmit.handleSubmit.bind(true)}>
           <option>Credits - Any</option>
           {options}
         </select>
@@ -102,6 +147,24 @@ function SelectPoints(handleSubmit) {
       <div className="pure-u-md-6-24 pure-u-lg-10-24"/>
     </div>
   );
+}
+
+function More(handleMore) {
+    if(handleMore.state.courses.length > 0 && handleMore.state.more) {
+      return (<div>
+        <div className="pure-u-1-2"/>
+          <div className="pure-u-1-2">
+          <div className="pure-u-1 pure-u-md-18-24 pure-u-lg-14-24">
+            <div className="pure-u-1-2"/>
+            <div className="pure-u-1-2">
+              <input className="pure-button pure-button-secondary  more" value="More" type="button" id="inputButton" onClick={handleMore.handleMore}/>
+            </div>
+          </div>
+        </div>
+      </div>
+      )} else {
+        return <div/>
+    } 
 }
 
 export default Search;

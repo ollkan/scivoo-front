@@ -6,7 +6,7 @@ class SearchInput extends Component {
 
   constructor(props){
     super(props);
-    this.handleSubmit = debounce(500, this.props.handleSubmit);
+    this.handleSubmit = debounce(500, this.props.handleSubmit.bind(true));
   }
 
   render() {

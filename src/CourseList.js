@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import './styles/App.css';
 import Info from './Info'
 
+const storage = window.sessionStorage;
 class CourseList extends Component {
 
   constructor(props) {
@@ -11,45 +12,29 @@ class CourseList extends Component {
       courses: props.courses
     }
     this.sortData = this.sortData.bind(this);
-
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({courses: nextProps.courses}, () => {
-    const el = document.getElementById("sortchoose");
-    !!el ?
-      this.sortData(el.options[el.selectedIndex].value) :
-      this.sortData('Sort - Highest rating')
-    })
+    this.setState({courses: nextProps.courses})
   }
 
   sortData(e) {
-    const sortData = (field, reverse, primer) => {
-
-       var key = primer ?
-           function(x) {return primer(x[field])} :
-           function(x) {return x[field]};
-
-       reverse = !reverse ? 1 : -1;
-
-       return function (a, b) {
-          // eslint-disable-next-line
-           return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
-         }
-    }
-
     switch (e) {
       case 'Lowest rating':
-        this.setState({courses: this.state.courses.sort(sortData('rating', false, parseFloat))})
+        storage.setItem("sort", "rating")
+        this.props.handleSubmit()
         break;
       case 'Sort - Highest rating':
-        this.setState({courses: this.state.courses.sort(sortData('rating', true, parseFloat))})
+        storage.setItem("sort", "rating desc")
+        this.props.handleSubmit()
         break;
       case 'Heaviest workload':
-        this.setState({courses: this.state.courses.sort(sortData('workload', false, parseFloat))})
+        storage.setItem("sort", "workload desc")
+        this.props.handleSubmit()
         break;
       case 'Lightest workload':
-        this.setState({courses: this.state.courses.sort(sortData('workload', false, parseFloat))})
+        storage.setItem("sort", "workload")
+        this.props.handleSubmit()
         break;
       default:
 

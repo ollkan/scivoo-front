@@ -217,3 +217,8 @@ textarea {
   background-size: cover;
   background-position: center;
 }
+
+.more {
+  margin-bottom: 20px;
+  margin-right: 5px;
+}
